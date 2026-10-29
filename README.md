@@ -2,7 +2,7 @@
 
 Calculadora hecha con HTML, CSS y JavaScript puros.
 
-**Demo en vivo:** https://TU-USUARIO.github.io/calculadora/
+**Demo en vivo:** https://oliercanteroo-cell.github.io/calculadora/
 
 ## Características
 - Suma, resta, multiplicación y división con jerarquía de operaciones
