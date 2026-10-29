@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="calculadora">
+        <div class="cabecera">
+            <span class="marca">CALC-3000</span>
+            <div class="solar"></div>
+        </div>
+        <div class="visor">
+            <div id="operacion" class="operacion"></div>
+            <div id="pantalla" class="pantalla">0</div>
+        </div>
+
+        <div id="botones" class="botones">
+            <button data-accion="limpiar" class="especial">C</button>
+            <button data-accion="borrar" class="especial">⌫</button>
+            <button data-accion="porcentaje" class="especial">%</button>
+            <button data-operador="/" class="operador">÷</button>
+
+            <button data-numero="7">7</button>
+            <button data-numero="8">8</button>
+            <button data-numero="9">9</button>
+            <button data-operador="*" class="operador">x</button>
+
+            <button data-numero="4">4</button>
+            <button data-numero="5">5</button>
+            <button data-numero="6">6</button>
+            <button data-operador="-" class="operador">-</button>
+
+            <button data-numero="1">1</button>
+            <button data-numero="2">2</button>
+            <button data-numero="3">3</button>
+            <button data-operador="+" class="operador">+</button>
+
+            <button data-accion="signo">±</button>
+            <button data-numero="0">0</button>
+            <button data-accion="punto">.</button>
+            <button data-accion="igual" class="igual">=</button>
+        </div>
+    </main>
+
+    <section class="historial">
+        <div class="historial-header">
+            <h2>Historial</h2>
+            <button id="borrarHistorial">Borrar</button>
+        </div>
+        <ul id="listaHistorial"></ul>
+    </section>
+    <script src="script.js"></script> 
+    <!-- El <script> va al final del body para que los elementos ya existan cuando el JS los busque. -->
+</body>
+</html>

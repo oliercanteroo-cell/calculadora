@@ -1,0 +1,227 @@
+/* ===== BASE ===== */
+
+* {
+    box-sizing: border-box; /* El ancho incluye padding y borde */
+    margin: 0;              /* Quita márgenes por defecto */
+    padding: 0;             /* Quita rellenos por defecto */
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;       /* Calculadora e historial, uno debajo del otro */
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    /* Fondo oscuro con un foco de luz en el centro, como una mesa iluminada */
+    background: radial-gradient(circle at 50% 30%, #4a4f57, #14161a 75%);
+    font-family: Arial, sans-serif;
+}
+
+/* ===== CUERPO DE LA CALCULADORA (aluminio cepillado) ===== */
+
+.calculadora {
+    width: 340px;
+    padding: 20px;
+    border-radius: 22px;
+    border: 1px solid #5d636b; /* Filo oscuro alrededor de la carcasa */
+    background:
+        /* Capa de arriba: líneas verticales finas que simulan el cepillado del metal */
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.07) 0 1px, rgba(0,0,0,0.05) 1px 3px),
+        /* Capa de abajo: degradado claro-oscuro-claro que imita el reflejo del metal */
+        linear-gradient(145deg, #eceef1, #aab0b7 40%, #cfd3d8 65%, #8d939b);
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,0.8),   /* Brillo en el borde superior */
+        inset 0 -3px 6px rgba(0,0,0,0.35),     /* Sombra interna en la parte baja */
+        0 3px 0 #6e747c,                       /* Grosor de la carcasa */
+        0 25px 45px rgba(0,0,0,0.65);          /* Sombra sobre la mesa */
+}
+
+/* ===== CABECERA: MARCA Y PANEL SOLAR ===== */
+
+.cabecera {
+    display: flex;
+    justify-content: space-between; /* Marca a la izquierda, panel solar a la derecha */
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.marca {
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 3px;            /* Separa las letras, como grabado en metal */
+    color: #3c4148;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.7); /* Efecto de letras grabadas */
+}
+
+.solar {
+    width: 100px;
+    height: 26px;
+    border-radius: 4px;
+    border: 2px solid #4a4f56;
+    background:
+        /* Reflejo diagonal brillante sobre el panel */
+        linear-gradient(115deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0) 45%),
+        /* Celdas solares: franjas marrones separadas por líneas finas */
+        repeating-linear-gradient(90deg, #3a2a20 0 22px, #1a110b 22px 24px);
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.7), 0 1px 0 rgba(255,255,255,0.6);
+}
+
+/* ===== PANTALLA LCD ===== */
+
+.visor {
+    padding: 12px 14px;
+    margin-bottom: 20px;
+    text-align: right;
+    border-radius: 8px;
+    border: 3px solid #3d4147;      /* Marco oscuro de la pantalla */
+    /* Verde grisáceo típico de las pantallas LCD, un poco más claro abajo */
+    background: linear-gradient(180deg, #a7b598, #c4d0b5);
+    box-shadow:
+        inset 0 4px 10px rgba(0,0,0,0.5),       /* Pantalla "hundida" en la carcasa */
+        0 1px 0 rgba(255,255,255,0.7);          /* Brillo en el borde inferior */
+}
+
+.operacion {
+    min-height: 1.2rem;             /* Evita que salte cuando la línea está vacía */
+    font-family: "Courier New", monospace;
+    font-size: 0.9rem;
+    color: #4a5640;                 /* Verde oscuro apagado (segmentos "tenues") */
+}
+
+.pantalla {
+    min-height: 2.4rem;
+    font-family: "Courier New", monospace; /* Letra tipo LCD, de ancho fijo */
+    font-size: 2rem;
+    font-weight: bold;
+    color: #1b2314;                 /* Casi negro verdoso, como los dígitos LCD */
+    white-space: nowrap;            /* No salta de línea */
+    overflow-x: auto;               /* Scroll horizontal si la expresión es larga */
+    scrollbar-width: none;          /* Oculta la barra de scroll (Firefox) */
+}
+
+.pantalla::-webkit-scrollbar { display: none; } /* Oculta la barra de scroll (Chrome, Edge) */
+
+/* ===== BOTONES ===== */
+
+.botones {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas iguales */
+    gap: 12px;                              /* Un poco más de espacio para ver la sombra 3D */
+}
+
+/* Botones normales (números, signo y punto): metal claro */
+button {
+    padding: 16px 0;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #22262b;                                   /* Texto oscuro sobre metal claro */
+    text-shadow: 0 1px 0 rgba(255,255,255,0.8);       /* Texto "grabado" */
+    background: linear-gradient(180deg, #f4f5f7, #b9bec5);
+    box-shadow:
+        0 4px 0 #6f757d,                      /* Lateral del botón: da el efecto 3D */
+        0 7px 8px rgba(0,0,0,0.45),           /* Sombra sobre la carcasa */
+        inset 0 1px 0 rgba(255,255,255,0.9);  /* Brillo en el borde superior */
+    transition: transform 0.05s, box-shadow 0.05s;
+}
+
+button:hover { filter: brightness(1.07); }  /* Se ilumina un poco al pasar el mouse */
+
+button:active {
+    transform: translateY(3px);             /* El botón se hunde 3px */
+    box-shadow:
+        0 1px 0 #6f757d,                    /* Su lateral casi desaparece */
+        0 2px 4px rgba(0,0,0,0.4),
+        inset 0 2px 5px rgba(0,0,0,0.3);
+}
+
+/* Operadores ÷ × − +: naranja metálico */
+.operador {
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+    background: linear-gradient(180deg, #ffbe4d, #d97706);
+    box-shadow:
+        0 4px 0 #8a4a05,
+        0 7px 8px rgba(0,0,0,0.45),
+        inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+/* Especiales C, ⌫ y %: acero oscuro */
+.especial {
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
+    background: linear-gradient(180deg, #7b818a, #3e434a);
+    box-shadow:
+        0 4px 0 #1b1e22,
+        0 7px 8px rgba(0,0,0,0.45),
+        inset 0 1px 0 rgba(255,255,255,0.35);
+}
+
+/* Igual =: verde metálico */
+.igual {
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+    background: linear-gradient(180deg, #4ade80, #15803d);
+    box-shadow:
+        0 4px 0 #0b4a22,
+        0 7px 8px rgba(0,0,0,0.45),
+        inset 0 1px 0 rgba(255,255,255,0.5);
+}
+
+/* ===== HISTORIAL (placa de acero oscuro) ===== */
+
+.historial {
+    width: 340px;
+    padding: 16px;
+    border-radius: 16px;
+    border: 1px solid #50565e;
+    color: #d7dbe0;
+    background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0 1px, rgba(0,0,0,0.05) 1px 3px),
+        linear-gradient(145deg, #454a52, #22252a);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.2),
+        0 15px 30px rgba(0,0,0,0.55);
+}
+
+.historial-header {
+    display: flex;
+    justify-content: space-between; /* Título a la izquierda, botón a la derecha */
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.historial-header h2 {
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+/* El botón "Borrar" del historial es más pequeño que los de la calculadora */
+.historial-header button {
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
+    background: linear-gradient(180deg, #7b818a, #3e434a);
+    box-shadow:
+        0 3px 0 #1b1e22,
+        0 5px 6px rgba(0,0,0,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.35);
+}
+
+#listaHistorial {
+    list-style: none;
+    max-height: 160px;
+    overflow-y: auto;               /* Scroll vertical si hay muchas operaciones */
+}
+
+#listaHistorial li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1); /* Línea fina entre operaciones */
+    font-family: "Courier New", monospace;
+    font-size: 0.95rem;
+    color: #cfd4da;
+}
