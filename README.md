@@ -4,7 +4,7 @@ Calculadora hecha con HTML, CSS y JavaScript puros.
 
 **Demo en vivo:** https://oliercanteroo-cell.github.io/calculadora/
 
-![Captura de la calculadora](imgcalculadoraMetalica.png)
+![Captura de la calculadora](img/calculadoraMetalica.png)
 
 ## Características
 - Suma, resta, multiplicación y división con jerarquía de operaciones
